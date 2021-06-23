@@ -32,3 +32,5 @@ if (-Not (Test-Path "eclipse\eclipse.exe"))
     }
     Expand-Archive -Path "downloads\eclipse.zip" -DestinationPath "." -Force
 }
+Remove-Item -Path "eclipse\eclipse.ini"
+Invoke-WebRequest -OutFile "eclipse\eclipse.ini" -Uri "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/eclipse.ini"
