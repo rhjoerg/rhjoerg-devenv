@@ -18,3 +18,4 @@ jobs:
           title: "Latest Release"
           files: |
             rhjoerg-devenv.ps1
+            eclipse.ini
