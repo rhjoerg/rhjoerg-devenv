@@ -13,6 +13,7 @@ Component | Remarks
 --- | ---
 Directory structure | See below
 JDK 11 | LTS Java SDK used to create Google App Engine Applications
+JDK 16 | Current Java SDK used for new software
 
 ## Directory Structure
 
@@ -22,3 +23,4 @@ Directory | Remarks
 &emsp;downloads | Download directory
 &emsp;jdk | Directory for JDKs
 &emsp;&emsp;jdk-11 | JDK-11
+&emsp;&emsp;jdk-16 | JDK-16
