@@ -1,13 +1,14 @@
 Write-Host "Creating Directories" -ForegroundColor Green
 New-Item -Name "downloads" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "jdk" -ItemType "directory" -ErrorAction Ignore
+New-Item -Name "workspace" -ItemType "directory" -ErrorAction Ignore
 
 Write-Host "Installing JDK-11" -ForegroundColor Green
 if (-Not (Test-Path "jdk\jdk-11\bin\java.exe"))
 {
     if (-Not (Test-Path "downloads\jdk-11.zip"))
     {
-        Invoke-WebRequest -Uri "https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip" -OutFile "downloads\jdk-11.zip"
+        Invoke-WebRequest -OutFile "downloads\jdk-11.zip" -Uri "https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip"
     }
     Expand-Archive -Path "downloads\jdk-11.zip" -DestinationPath "jdk" -Force
 }
@@ -17,7 +18,17 @@ if (-Not (Test-Path "jdk\jdk-16\bin\java.exe"))
 {
     if (-Not (Test-Path "downloads\jdk-16.zip"))
     {
-        Invoke-WebRequest -Uri "https://download.java.net/openjdk/jdk16/ri/openjdk-16+36_windows-x64_bin.zip" -OutFile "downloads\jdk-16.zip"
+        Invoke-WebRequest -OutFile "downloads\jdk-16.zip" -Uri "https://download.java.net/openjdk/jdk16/ri/openjdk-16+36_windows-x64_bin.zip"
     }
     Expand-Archive -Path "downloads\jdk-16.zip" -DestinationPath "jdk" -Force
+}
+
+Write-Host "Installing Eclipse" -ForegroundColor Green
+if (-Not (Test-Path "eclipse\eclipse.exe"))
+{
+    if (-Not (Test-Path "downloads\eclipse.zip"))
+    {
+        Invoke-WebRequest -OutFile "downloads\eclipse.zip" -Uri "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-06/R/eclipse-rcp-2021-06-R-win32-x86_64.zip&r=1"
+    }
+    Expand-Archive -Path "downloads\eclipse.zip" -DestinationPath "." -Force
 }
