@@ -19,6 +19,6 @@ JDK 11 | LTS Java SDK used to create Google App Engine Applications
 Directory | Remarks
 --- | ---
 &lt;root directory&gt; | The directory you run the script in
-&#x2523;downloads | Download directory
-&#x2523;jdk | Directory for JDKs
-&#x2503;&#x2523;jdk-11 | JDK-11
+&emsp;downloads | Download directory
+&emsp;jdk | Directory for JDKs
+&emsp;&emsp;jdk-11 | JDK-11

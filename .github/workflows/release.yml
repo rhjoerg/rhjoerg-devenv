@@ -1,0 +1,20 @@
+
+name: Release
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Ckeckout
+        uses: actions/checkout@v2
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Latest Release"
+          files: |
+            rhjoerg-devenv.ps1
