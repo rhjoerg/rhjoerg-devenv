@@ -2,6 +2,11 @@ Write-Host "Creating Directories" -ForegroundColor Green
 New-Item -Name "downloads" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "jdk" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "workspace" -ItemType "directory" -ErrorAction Ignore
+New-Item -Name "workspace\.metadata" -ItemType "directory" -ErrorAction Ignore
+New-Item -Name "workspace\.metadata" -ItemType "directory" -ErrorAction Ignore
+New-Item -Name "workspace\.metadata\.plugins" -ItemType "directory" -ErrorAction Ignore
+New-Item -Name "workspace\.metadata\.plugins\org.eclipse.core.runtime" -ItemType "directory" -ErrorAction Ignore
+New-Item -Name "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings" -ItemType "directory" -ErrorAction Ignore
 
 Write-Host "Installing JDK-11" -ForegroundColor Green
 if (-Not (Test-Path "jdk\jdk-11\bin\java.exe"))
@@ -46,3 +51,8 @@ if (-Not (Test-Path "eclipse\eclipse.exe"))
 }
 Remove-Item -Path "eclipse\eclipse.ini"
 Invoke-WebRequest -OutFile "eclipse\eclipse.ini" -Uri "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/eclipse.ini"
+
+Write-Host "Configuring Eclipse" -ForegroundColor Green
+Remove-Item -Path "eclipse\eclipse.ini"
+Invoke-WebRequest -OutFile "eclipse\eclipse.ini" -Uri "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/eclipse.ini"
+Invoke-WebRequest -Outfile "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ant.core.prefs" -Uri "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/org.eclipse.ant.core.prefs"
