@@ -8,6 +8,8 @@ New-Item -Name "workspace\.metadata\.plugins" -ItemType "directory" -ErrorAction
 New-Item -Name "workspace\.metadata\.plugins\org.eclipse.core.runtime" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings" -ItemType "directory" -ErrorAction Ignore
 
+#------------------------------------------------------------------------------
+
 Write-Host "Installing JDK-11" -ForegroundColor Green
 
 $jdk11ExePath = "jdk\jdk-11\bin\java.exe"
@@ -23,6 +25,8 @@ if (-Not (Test-Path $jdk11ExePath))
 
     Expand-Archive -Path $jdk11ZipPath -DestinationPath "jdk" -Force
 }
+
+#------------------------------------------------------------------------------
 
 Write-Host "Installing JDK-16" -ForegroundColor Green
 
@@ -40,16 +44,19 @@ if (-Not (Test-Path $jdk16ExePath))
     Expand-Archive -Path $jdk16ZipPath -DestinationPath "jdk" -Force
 }
 
+#------------------------------------------------------------------------------
+
 Write-Host "Installing Ant 1.10" -ForegroundColor Green
 
 $antCmdPath = "ant\bin\ant.cmd"
 $antZipPath = "downloads\ant.zip"
+$antZipUri = "https://downloads.apache.org//ant/binaries/apache-ant-1.10.10-bin.zip"
 
 if (-Not (Test-Path $antCmdPath))
 {
     if (-Not (Test-Path $antZipPath))
     {
-        Invoke-WebRequest -OutFile $antZipPath -Uri "https://downloads.apache.org//ant/binaries/apache-ant-1.10.10-bin.zip"
+        Invoke-WebRequest -OutFile $antZipPath -Uri $antZipUri
     }
 
     Expand-Archive -Path $antZipPath -DestinationPath "." -Force
@@ -57,7 +64,29 @@ if (-Not (Test-Path $antCmdPath))
     Move-Item -Path "apache-ant-1.10.10" -Destination "ant"
 }
 
-Write-Host "Installing Eclipse" -ForegroundColor Green
+#------------------------------------------------------------------------------
+
+Write-Host "Installing Maven 3.8.1" -ForegroundColor Green
+
+$mavenCmdPath = "maven\bin\mvn.cmd"
+$mavenZipPath = "downloads\maven.zip"
+$mavenZipUri = "https://downloads.apache.org/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.zip"
+
+if (-Not (Test-Path $mavenCmdPath))
+{
+    if (-Not (Test-Path $mavenZipPath))
+    {
+        Invoke-WebRequest -OutFile $mavenZipPath -Uri $mavenZipUri
+    }
+
+    Expand-Archive -Path $mavenZipPath -DestinationPath "." -Force
+    Remove-Item -Path "maven" -Recurse -Force -ErrorAction Ignore
+    Move-Item -Path "apache-maven-3.8.1" -Destination "maven"
+}
+
+#------------------------------------------------------------------------------
+
+Write-Host "Installing Eclipse 2021-06" -ForegroundColor Green
 
 $eclipseExePath = "eclipse\eclipse.exe"
 $eclipseZipPath = "downloads\eclipse.zip"
@@ -71,6 +100,8 @@ if (-Not (Test-Path $eclipseExePath))
     }
     Expand-Archive -Path $eclipseZipPath -DestinationPath "." -Force
 }
+
+#------------------------------------------------------------------------------
 
 Write-Host "Configuring Eclipse" -ForegroundColor Green
 
@@ -97,3 +128,5 @@ $jdtPrefsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/late
 
 Remove-Item -Path $jdtPrefsPath
 Invoke-WebRequest -Outfile $jdtPrefsPath -Uri $jdtPrefsUri
+
+#------------------------------------------------------------------------------
