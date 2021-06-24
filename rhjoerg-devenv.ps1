@@ -94,7 +94,7 @@ $eclipseZipUri = "https://www.eclipse.org/downloads/download.php?file=/technolog
 
 if (-Not (Test-Path $eclipseExePath))
 {
-    if (-Not (Test-Path $eclipseZipPat))
+    if (-Not (Test-Path $eclipseZipPath))
     {
         Invoke-WebRequest -OutFile $eclipseZipPath -Uri $eclipseZipUri
     }
