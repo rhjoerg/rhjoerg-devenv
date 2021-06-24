@@ -1,3 +1,10 @@
+
+#------------------------------------------------------------------------------
+
+$devenv = (Get-Item -Path ".").FullName
+
+#------------------------------------------------------------------------------
+
 Write-Host "Creating Directories" -ForegroundColor Green
 New-Item -Name "downloads" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "jdk" -ItemType "directory" -ErrorAction Ignore
@@ -85,6 +92,11 @@ if (-Not (Test-Path $mavenCmdPath))
 }
 
 $mavenSettingsPath = "maven/conf/settings.xml"
+$mavenSettingsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/settings.xml"
+
+Remove-Item -Path $mavenSettingsPath -ErrorAction Ignore
+Invoke-WebRequest -OutFile $mavenSettingsPath -Uri $mavenSettingsUri
+(Get-Content -path $mavenSettingsPath -Raw) -replace "%DEVENV%", $devenv
 
 #------------------------------------------------------------------------------
 
