@@ -23,6 +23,18 @@ if (-Not (Test-Path "jdk\jdk-16\bin\java.exe"))
     Expand-Archive -Path "downloads\jdk-16.zip" -DestinationPath "jdk" -Force
 }
 
+Write-Host "Installing Ant 1.10" -ForegroundColor Green
+if (-Not (Test-Path "ant\bin\ant.cmd"))
+{
+    if (-Not (Test-Path "downloads\ant.zip"))
+    {
+        Invoke-WebRequest -OutFile "downloads\ant.zip" -Uri "https://downloads.apache.org//ant/binaries/apache-ant-1.10.10-bin.zip"
+    }
+    Expand-Archive -Path "downloads\ant.zip" -DestinationPath "." -Force
+    Remove-Item -Path "ant" -Recurse -Force -ErrorAction Ignore
+    Move-Item -Path "apache-ant-1.10.10" -Destination "ant"
+}
+
 Write-Host "Installing Eclipse" -ForegroundColor Green
 if (-Not (Test-Path "eclipse\eclipse.exe"))
 {
