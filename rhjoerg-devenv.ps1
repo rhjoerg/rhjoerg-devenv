@@ -94,9 +94,10 @@ if (-Not (Test-Path $mavenCmdPath))
 $mavenSettingsPath = "maven/conf/settings.xml"
 $mavenSettingsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/settings.xml"
 
+New-Item -Name "maven\repository" -ItemType "directory" -ErrorAction Ignore
 Remove-Item -Path $mavenSettingsPath -ErrorAction Ignore
 Invoke-WebRequest -OutFile $mavenSettingsPath -Uri $mavenSettingsUri
-(Get-Content -path $mavenSettingsPath -Raw) -replace "%DEVENV%", $devenv
+(Get-Content -path $mavenSettingsPath -Raw) -replace "%DEVENV%", $devenv | Set-Content -Path $mavenSettingsPath
 
 #------------------------------------------------------------------------------
 
