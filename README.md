@@ -51,4 +51,9 @@ Click on "Review IDE configuration settings" and configure as shown in the image
 I haven't found the location yet, where Eclipse stores the Maven settings. Therefore go to "Window > Preferences", navigate to "Maven > Installations"
 and add the Maven installation installed by the script as shown below:
 
-![Maven settings](images/maven.png)
+![Maven settings](images/maven-1.png)
+
+I haven't found the location yet, where Eclipse stores the Maven settings. Therefore go to "Window > Preferences", navigate to "Maven > User Settings"
+and set the global as well as the local settings to ```..\maven\conf\settings.xml```. Don't forget to push the "Update Settings" button.
+
+![Maven settings](images/maven-2.png)
