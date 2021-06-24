@@ -1,7 +1,7 @@
 [![Release](https://github.com/rhjoerg/rhjoerg-devenv/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/rhjoerg/rhjoerg-devenv/actions/workflows/release.yml)
 
 # rhjoerg-devenv
-Setup script to install my development environment
+Setup script to install my development environment; targeted for software development under Windows 10.
 
 ## Usage
 
