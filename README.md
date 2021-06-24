@@ -37,3 +37,5 @@ Directory | Remarks
 The ```eclipse/eclipse.ini``` is replaced with the version available in this project. It sets the Java SDK to use to the JDK-16 installed by the script.
 
 The Ant preferences are set to use the Ant installed by the script.
+
+The additional JDK-11 is added to the "Installed JREs" settings.
