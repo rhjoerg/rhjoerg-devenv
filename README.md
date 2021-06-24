@@ -31,6 +31,7 @@ Directory | Remarks
 &emsp;jdk | Directory for JDKs
 &emsp;&emsp;jdk-11 | JDK-11
 &emsp;&emsp;jdk-16 | JDK-16
+&emsp;maven | Maven
 &emsp;workspace | Eclipse workspace
 
 # Eclipse Configuration
