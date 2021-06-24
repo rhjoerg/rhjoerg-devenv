@@ -19,4 +19,4 @@ jobs:
           files: |
             rhjoerg-devenv.ps1
             eclipse.ini
-            org.eclipse.ant.core.prefs
+            org.eclipse.ant.core.prefs.txt
