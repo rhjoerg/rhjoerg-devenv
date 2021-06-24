@@ -21,3 +21,5 @@ jobs:
             eclipse.ini
             org.eclipse.ant.core.prefs
             org.eclipse.jdt.launching.prefs
+            settings.xml
+
