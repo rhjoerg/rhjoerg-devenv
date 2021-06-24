@@ -17,7 +17,7 @@ Directory structure | See below
 JDK 11 | LTS Java SDK used to create Google App Engine Applications
 JDK 16 | Current Java SDK used for new software
 Ant 1.10.10 | Current Ant building tool
-Eclipse 2021-06 | Current Eclipse IDE, configured to use JDK-16 and workspace within this development environment
+Eclipse 2021-06 | Current Eclipse IDE (RCP edition), configured to use JDK-16 and workspace within this development environment
 
 ## Directory Structure
 

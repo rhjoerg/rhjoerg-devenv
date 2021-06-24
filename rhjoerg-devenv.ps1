@@ -9,57 +9,79 @@ New-Item -Name "workspace\.metadata\.plugins\org.eclipse.core.runtime" -ItemType
 New-Item -Name "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings" -ItemType "directory" -ErrorAction Ignore
 
 Write-Host "Installing JDK-11" -ForegroundColor Green
-if (-Not (Test-Path "jdk\jdk-11\bin\java.exe"))
+
+$jdk11ExePath = "jdk\jdk-11\bin\java.exe"
+$jdk11ZipPath = "downloads\jdk-11.zip"
+$jdk11Uri = "https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip"
+
+if (-Not (Test-Path $jdk11ExePath))
 {
-    if (-Not (Test-Path "downloads\jdk-11.zip"))
+    if (-Not (Test-Path $jdk11ZipPath))
     {
-        Invoke-WebRequest -OutFile "downloads\jdk-11.zip" -Uri "https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip"
+        Invoke-WebRequest -OutFile $jdk11ZipPath -Uri $jdk11Uri
     }
-    Expand-Archive -Path "downloads\jdk-11.zip" -DestinationPath "jdk" -Force
+
+    Expand-Archive -Path $jdk11ZipPath -DestinationPath "jdk" -Force
 }
 
 Write-Host "Installing JDK-16" -ForegroundColor Green
-if (-Not (Test-Path "jdk\jdk-16\bin\java.exe"))
+
+$jdk16ExePath = "jdk\jdk-16\bin\java.exe"
+$jdk16ZipPath = "downloads\jdk-16.zip"
+$jdk16Uri = "https://download.java.net/openjdk/jdk16/ri/openjdk-16+36_windows-x64_bin.zip"
+
+if (-Not (Test-Path $jdk16ExePath))
 {
-    if (-Not (Test-Path "downloads\jdk-16.zip"))
+    if (-Not (Test-Path $jdk16ZipPath))
     {
-        Invoke-WebRequest -OutFile "downloads\jdk-16.zip" -Uri "https://download.java.net/openjdk/jdk16/ri/openjdk-16+36_windows-x64_bin.zip"
+        Invoke-WebRequest -OutFile $jdk16ZipPath -Uri $jdk16Uri
     }
-    Expand-Archive -Path "downloads\jdk-16.zip" -DestinationPath "jdk" -Force
+
+    Expand-Archive -Path $jdk16ZipPath -DestinationPath "jdk" -Force
 }
 
 Write-Host "Installing Ant 1.10" -ForegroundColor Green
-if (-Not (Test-Path "ant\bin\ant.cmd"))
+
+$antCmdPath = "ant\bin\ant.cmd"
+$antZipPath = "downloads\ant.zip"
+
+if (-Not (Test-Path $antCmdPath))
 {
-    if (-Not (Test-Path "downloads\ant.zip"))
+    if (-Not (Test-Path $antZipPath))
     {
-        Invoke-WebRequest -OutFile "downloads\ant.zip" -Uri "https://downloads.apache.org//ant/binaries/apache-ant-1.10.10-bin.zip"
+        Invoke-WebRequest -OutFile $antZipPath -Uri "https://downloads.apache.org//ant/binaries/apache-ant-1.10.10-bin.zip"
     }
-    Expand-Archive -Path "downloads\ant.zip" -DestinationPath "." -Force
+
+    Expand-Archive -Path $antZipPath -DestinationPath "." -Force
     Remove-Item -Path "ant" -Recurse -Force -ErrorAction Ignore
     Move-Item -Path "apache-ant-1.10.10" -Destination "ant"
 }
 
 Write-Host "Installing Eclipse" -ForegroundColor Green
-if (-Not (Test-Path "eclipse\eclipse.exe"))
+
+$eclipseExePath = "eclipse\eclipse.exe"
+$eclipseZipPath = "downloads\eclipse.zip"
+$eclipseZipUri = "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-06/R/eclipse-rcp-2021-06-R-win32-x86_64.zip&r=1"
+
+if (-Not (Test-Path $eclipseExePath))
 {
-    if (-Not (Test-Path "downloads\eclipse.zip"))
+    if (-Not (Test-Path $eclipseZipPat))
     {
-        Invoke-WebRequest -OutFile "downloads\eclipse.zip" -Uri "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-06/R/eclipse-rcp-2021-06-R-win32-x86_64.zip&r=1"
+        Invoke-WebRequest -OutFile $eclipseZipPath -Uri $eclipseZipUri
     }
-    Expand-Archive -Path "downloads\eclipse.zip" -DestinationPath "." -Force
+    Expand-Archive -Path $eclipseZipPath -DestinationPath "." -Force
 }
 
 Write-Host "Configuring Eclipse" -ForegroundColor Green
 
 $eclipseIniPath = "eclipse\eclipse.ini"
 $eclipseIniLength = (Get-Item -Path $eclipseIniPath).Length
-$eclipseUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/eclipse.ini"
+$eclipseIniUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/eclipse.ini"
 
 if ($eclipseIniLength -eq 714)
 {
     Remove-Item -Path $eclipseIniPath
-    Invoke-WebRequest -OutFile $eclipseIniPath -Uri $eclipseUri
+    Invoke-WebRequest -OutFile $eclipseIniPath -Uri $eclipseIniUri
 }
 
 $antPrefsPath = "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ant.core.prefs"
