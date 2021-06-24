@@ -34,10 +34,16 @@ Directory | Remarks
 &emsp;maven | Maven
 &emsp;workspace | Eclipse workspace
 
-# Eclipse Configuration
+# Automatic Eclipse Configuration
 
 The ```eclipse/eclipse.ini``` is replaced with the version available in this project. It sets the Java SDK to use to the JDK-16 installed by the script.
 
 The Ant preferences are set to use the Ant installed by the script.
 
 The additional JDK-11 is added to the "Installed JREs" settings.
+
+# Manual Eclipse Configuration
+
+Click on "Review IDE configuration settings" and configure as shown in the image below:
+
+![Configuration settings](images/config.png)
