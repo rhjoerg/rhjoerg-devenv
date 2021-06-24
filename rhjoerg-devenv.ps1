@@ -91,3 +91,9 @@ if (-Not (Test-Path $antPrefsPath))
 {
     Invoke-WebRequest -Outfile $antPrefsPath -Uri $antPrefsUri
 }
+
+$jdtPrefsPath = "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.jdt.launching.prefs"
+$jdtPrefsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/org.eclipse.jdt.launching.prefs"
+
+Remove-Item -Path $jdtPrefsPath
+Invoke-WebRequest -Outfile $jdtPrefsPath -Uri $jdtPrefsUri
