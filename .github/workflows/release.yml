@@ -20,3 +20,4 @@ jobs:
             rhjoerg-devenv.ps1
             eclipse.ini
             org.eclipse.ant.core.prefs
+            org.eclipse.jdt.launching.prefs
