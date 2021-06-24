@@ -84,6 +84,8 @@ if (-Not (Test-Path $mavenCmdPath))
     Move-Item -Path "apache-maven-3.8.1" -Destination "maven"
 }
 
+$mavenSettingsPath = "maven/conf/settings.xml"
+
 #------------------------------------------------------------------------------
 
 Write-Host "Installing Eclipse 2021-06" -ForegroundColor Green
