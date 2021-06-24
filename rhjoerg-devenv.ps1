@@ -49,10 +49,23 @@ if (-Not (Test-Path "eclipse\eclipse.exe"))
     }
     Expand-Archive -Path "downloads\eclipse.zip" -DestinationPath "." -Force
 }
-Remove-Item -Path "eclipse\eclipse.ini"
-Invoke-WebRequest -OutFile "eclipse\eclipse.ini" -Uri "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/eclipse.ini"
 
 Write-Host "Configuring Eclipse" -ForegroundColor Green
-Remove-Item -Path "eclipse\eclipse.ini"
-Invoke-WebRequest -OutFile "eclipse\eclipse.ini" -Uri "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/eclipse.ini"
-Invoke-WebRequest -Outfile "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ant.core.prefs" -Uri "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/org.eclipse.ant.core.prefs"
+
+$eclipseIniPath = "eclipse\eclipse.ini"
+$eclipseIniLength = (Get-Item -Path $eclipseIniPath).Length
+$eclipseUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/eclipse.ini"
+
+if ($eclipseIniLength -eq 714)
+{
+    Remove-Item -Path $eclipseIniPath
+    Invoke-WebRequest -OutFile $eclipseIniPath -Uri $eclipseUri
+}
+
+$antPrefsPath = "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ant.core.prefs"
+$antPrefsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/org.eclipse.ant.core.prefs"
+
+if (-Not (Test-Path $antPrefsPath))
+{
+    Invoke-WebRequest -Outfile $antPrefsPath -Uri $antPrefsUri
+}
