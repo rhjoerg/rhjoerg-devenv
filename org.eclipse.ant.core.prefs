@@ -1,0 +1,3 @@
+ant_home=..\\ant
+ant_home_entries=../ant/lib/ant-antlr.jar,../ant/lib/ant-apache-bcel.jar,../ant/lib/ant-apache-bsf.jar,../ant/lib/ant-apache-log4j.jar,../ant/lib/ant-apache-oro.jar,../ant/lib/ant-apache-regexp.jar,../ant/lib/ant-apache-resolver.jar,../ant/lib/ant-apache-xalan2.jar,../ant/lib/ant-commons-logging.jar,../ant/lib/ant-commons-net.jar,../ant/lib/ant-imageio.jar,../ant/lib/ant-jai.jar,../ant/lib/ant-javamail.jar,../ant/lib/ant-jdepend.jar,../ant/lib/ant-jmf.jar,../ant/lib/ant-jsch.jar,../ant/lib/ant-junit.jar,../ant/lib/ant-junit4.jar,../ant/lib/ant-junitlauncher.jar,../ant/lib/ant-launcher.jar,../ant/lib/ant-netrexx.jar,../ant/lib/ant-swing.jar,../ant/lib/ant-testutil.jar,../ant/lib/ant-xz.jar,./ant/lib/ant.jar,
+eclipse.preferences.version=1
