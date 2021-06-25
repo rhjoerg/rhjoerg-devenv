@@ -128,14 +128,6 @@ if (Test-Missing -Path $eclipseExePath)
 
 #------------------------------------------------------------------------------
 
-Write-Host "Installing additional Eclipse features" -ForegroundColor Green
-
-Set-Location eclipse
-.\eclipsec.exe -noSplash -application org.eclipse.equinox.p2.director -repository https://download.eclipse.org/releases/2021-06/202106161001/ -installIU org.eclipse.jdt.feature.group
-Set-Location ..
-
-#------------------------------------------------------------------------------
-
 Write-Host "Configuring Eclipse" -ForegroundColor Green
 
 $eclipseIniPath = "eclipse\eclipse.ini"
@@ -161,5 +153,13 @@ $jdtPrefsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/late
 
 Remove-Item -Path $jdtPrefsPath
 Invoke-WebRequest -Outfile $jdtPrefsPath -Uri $jdtPrefsUri
+
+#------------------------------------------------------------------------------
+
+Write-Host "Installing additional Eclipse features" -ForegroundColor Green
+
+Set-Location eclipse
+.\eclipsec.exe -noSplash -application org.eclipse.equinox.p2.director -repository https://download.eclipse.org/releases/2021-06/202106161001/ -installIU org.eclipse.jdt.feature.group
+Set-Location ..
 
 #------------------------------------------------------------------------------
