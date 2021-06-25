@@ -136,7 +136,7 @@ $eclipseIniUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/la
 
 if ($eclipseIniLength -eq 714)
 {
-    Remove-Item -Path $eclipseIniPath
+    Remove-Item -Path $eclipseIniPath -ErrorAction Ignore
     Invoke-WebRequest -OutFile $eclipseIniPath -Uri $eclipseIniUri
 }
 
@@ -151,7 +151,7 @@ if (Test-Missing -Path $antPrefsPath)
 $jdtPrefsPath = "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.jdt.launching.prefs"
 $jdtPrefsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/org.eclipse.jdt.launching.prefs"
 
-Remove-Item -Path $jdtPrefsPath
+Remove-Item -Path $jdtPrefsPath -ErrorAction Ignore
 Invoke-WebRequest -Outfile $jdtPrefsPath -Uri $jdtPrefsUri
 
 #------------------------------------------------------------------------------
