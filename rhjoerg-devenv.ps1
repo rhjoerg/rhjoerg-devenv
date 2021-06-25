@@ -130,6 +130,7 @@ if (Test-Missing -Path $eclipseExePath)
 Write-Host "Installing additional Eclipse features" -ForegroundColor Green
 
 Set-Location eclipse
+.\eclipsec.exe -noSplash -application org.eclipse.equinox.p2.director -help
 Set-Location ..
 
 #------------------------------------------------------------------------------
