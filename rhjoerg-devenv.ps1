@@ -17,6 +17,7 @@ function Test-Missing
 Write-Host "Creating Directories" -ForegroundColor Green
 New-Item -Name "downloads" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "jdk" -ItemType "directory" -ErrorAction Ignore
+New-Item -Name "git" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "workspace" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "workspace\.metadata" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "workspace\.metadata" -ItemType "directory" -ErrorAction Ignore
