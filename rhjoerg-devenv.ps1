@@ -138,6 +138,7 @@ if ($eclipseIniLength -eq 714)
 {
     Remove-Item -Path $eclipseIniPath -ErrorAction Ignore
     Invoke-WebRequest -OutFile $eclipseIniPath -Uri $eclipseIniUri
+    (Get-Content -path $eclipseIniPath -Raw) -replace "%DEVENV%", $devenv | Set-Content -Path $eclipseIniPath
 }
 
 $antPrefsPath = "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ant.core.prefs"
