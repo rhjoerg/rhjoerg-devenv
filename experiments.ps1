@@ -2,7 +2,8 @@
 $contentPath = "downloads\content.jar"
 $contentUri = "https://download.eclipse.org/releases/2021-06/202106161001/content.jar"
 $contentXmlPath = "downloads\content.xml"
-$contentIdsPath = "downloads\content.txt"
+$contentAllIdsPath = "downloads\content-all-ids.txt"
+$contentGroupIdsPath = "downloads\content-group-ids.txt"
 
 if (-Not (Test-Path -Path $contentPath))
 {
@@ -12,5 +13,11 @@ if (-Not (Test-Path -Path $contentPath))
 Remove-Item -Path $contentXmlPath -Force -ErrorAction Ignore
 Expand-Archive -Path $contentPath -DestinationPath ".\downloads" -Force
 
-$xml = Select-Xml -Path $contentXmlPath -XPath "/repository/units/unit[contains(@id, '.feature.group')]/@id"
-$xml | Set-Content -Path $contentIdsPath
+$xml = [xml] (Get-Content $contentXmlPath)
+$ids = $xml.repository.units.unit.id | Sort-Object
+$ids | Set-Content -Path $contentAllIdsPath
+
+# $ids | Get-Member
+
+$ids = $ids | Where-Object { $_.EndsWith(".feature.group") }
+$ids | Set-Content -Path $contentGroupIdsPath
