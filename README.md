@@ -7,7 +7,9 @@ Setup script to install my development environment; targeted for software develo
 
 1. Create a folder which will contain your development environment.
 2. Download the [Installation Script](https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/rhjoerg-devenv.ps1) ("the script") into the folder created in 1.
-3. Run the script within the folder created in 1.
+3. Run PowerShell as Administrator (right-click within the folder > PowerShell 7 > Open here as Administrator)
+4. Run the command ```Set-ExecutionPolicy Bypass``` within the PowerShell console
+5. Run the command ```.\rhjoerg-devenv.ps1``` within the PowerShell console.
 
 ## Components
 
