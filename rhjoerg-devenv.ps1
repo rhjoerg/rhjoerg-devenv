@@ -130,7 +130,7 @@ if (Test-Missing -Path $eclipseExePath)
 Write-Host "Installing additional Eclipse features" -ForegroundColor Green
 
 Set-Location eclipse
-.\eclipsec.exe -noSplash -application org.eclipse.equinox.p2.director -help
+.\eclipsec.exe -noSplash -application org.eclipse.equinox.p2.director -repository https://download.eclipse.org/releases/2021-06/202106161001/ -installIU org.eclipse.jdt.feature.group
 Set-Location ..
 
 #------------------------------------------------------------------------------
