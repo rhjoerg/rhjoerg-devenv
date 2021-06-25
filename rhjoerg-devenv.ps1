@@ -5,6 +5,15 @@ $devenv = (Get-Item -Path ".").FullName
 
 #------------------------------------------------------------------------------
 
+function Test-Missing
+{
+    param ($Path)
+
+    -Not (Test-Path $Path)
+}
+
+#------------------------------------------------------------------------------
+
 Write-Host "Creating Directories" -ForegroundColor Green
 New-Item -Name "downloads" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "jdk" -ItemType "directory" -ErrorAction Ignore
@@ -23,9 +32,9 @@ $jdk11ExePath = "jdk\jdk-11\bin\java.exe"
 $jdk11ZipPath = "downloads\jdk-11.zip"
 $jdk11Uri = "https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip"
 
-if (-Not (Test-Path $jdk11ExePath))
+if (Test-Missing -Path $jdk11ExePath)
 {
-    if (-Not (Test-Path $jdk11ZipPath))
+    if (Test-Missing -Path $jdk11ZipPath)
     {
         Invoke-WebRequest -OutFile $jdk11ZipPath -Uri $jdk11Uri
     }
@@ -41,9 +50,9 @@ $jdk16ExePath = "jdk\jdk-16\bin\java.exe"
 $jdk16ZipPath = "downloads\jdk-16.zip"
 $jdk16Uri = "https://download.java.net/openjdk/jdk16/ri/openjdk-16+36_windows-x64_bin.zip"
 
-if (-Not (Test-Path $jdk16ExePath))
+if (Test-Missing -Path $jdk16ExePath)
 {
-    if (-Not (Test-Path $jdk16ZipPath))
+    if (Test-Missing -Path $jdk16ZipPath)
     {
         Invoke-WebRequest -OutFile $jdk16ZipPath -Uri $jdk16Uri
     }
@@ -59,9 +68,9 @@ $antCmdPath = "ant\bin\ant.cmd"
 $antZipPath = "downloads\ant.zip"
 $antZipUri = "https://downloads.apache.org//ant/binaries/apache-ant-1.10.10-bin.zip"
 
-if (-Not (Test-Path $antCmdPath))
+if (Test-Missing -Path $antCmdPath)
 {
-    if (-Not (Test-Path $antZipPath))
+    if (Test-Missing -Path $antZipPath)
     {
         Invoke-WebRequest -OutFile $antZipPath -Uri $antZipUri
     }
@@ -79,7 +88,7 @@ $mavenCmdPath = "maven\bin\mvn.cmd"
 $mavenZipPath = "downloads\maven.zip"
 $mavenZipUri = "https://downloads.apache.org/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.zip"
 
-if (-Not (Test-Path $mavenCmdPath))
+if (Test-Missing -Path $mavenCmdPath)
 {
     if (-Not (Test-Path $mavenZipPath))
     {
@@ -107,14 +116,21 @@ $eclipseExePath = "eclipse\eclipse.exe"
 $eclipseZipPath = "downloads\eclipse.zip"
 $eclipseZipUri = "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-06/R/eclipse-rcp-2021-06-R-win32-x86_64.zip&r=1"
 
-if (-Not (Test-Path $eclipseExePath))
+if (Test-Missing -Path $eclipseExePath)
 {
-    if (-Not (Test-Path $eclipseZipPath))
+    if (Test-Missing -Path $eclipseZipPath)
     {
         Invoke-WebRequest -OutFile $eclipseZipPath -Uri $eclipseZipUri
     }
     Expand-Archive -Path $eclipseZipPath -DestinationPath "." -Force
 }
+
+#------------------------------------------------------------------------------
+
+Write-Host "Installing additional Eclipse features" -ForegroundColor Green
+
+Set-Location eclipse
+Set-Location ..
 
 #------------------------------------------------------------------------------
 
@@ -133,7 +149,7 @@ if ($eclipseIniLength -eq 714)
 $antPrefsPath = "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ant.core.prefs"
 $antPrefsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/org.eclipse.ant.core.prefs"
 
-if (-Not (Test-Path $antPrefsPath))
+if (Test-Missing -Path $antPrefsPath)
 {
     Invoke-WebRequest -Outfile $antPrefsPath -Uri $antPrefsUri
 }
