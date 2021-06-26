@@ -27,13 +27,12 @@ Eclipse 2021-06 | Current Eclipse IDE (RCP edition), configured to use JDK-16 an
 Directory | Remarks
 --- | ---
 &lt;root directory&gt; | The directory you run the script in
-&emsp;ant | Ant 1.10.10
 &emsp;downloads | Download directory
 &emsp;eclipse | Eclipse
 &emsp;jdk | Directory for JDKs
 &emsp;&emsp;jdk-11 | JDK-11
 &emsp;&emsp;jdk-16 | JDK-16
-&emsp;maven | Maven
+&emsp;maven | Maven configuration and local repository
 &emsp;workspace | Eclipse workspace
 
 # Automatic Eclipse Configuration
