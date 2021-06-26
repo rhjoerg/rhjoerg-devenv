@@ -15,6 +15,7 @@ function Test-Missing
 #------------------------------------------------------------------------------
 
 Write-Host "Creating Directories" -ForegroundColor Green
+New-Item -Name "configuration" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "downloads" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "jdk" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "git" -ItemType "directory" -ErrorAction Ignore
@@ -63,27 +64,7 @@ if (Test-Missing -Path $jdk16ExePath)
 
 #------------------------------------------------------------------------------
 
-Write-Host "Installing Ant 1.10" -ForegroundColor Green
-
-$antCmdPath = "ant\bin\ant.cmd"
-$antZipPath = "downloads\ant.zip"
-$antZipUri = "https://downloads.apache.org//ant/binaries/apache-ant-1.10.10-bin.zip"
-
-if (Test-Missing -Path $antCmdPath)
-{
-    if (Test-Missing -Path $antZipPath)
-    {
-        Invoke-WebRequest -OutFile $antZipPath -Uri $antZipUri
-    }
-
-    Expand-Archive -Path $antZipPath -DestinationPath "." -Force
-    Remove-Item -Path "ant" -Recurse -Force -ErrorAction Ignore
-    Move-Item -Path "apache-ant-1.10.10" -Destination "ant"
-}
-
-#------------------------------------------------------------------------------
-
-Write-Host "Installing Maven 3.8.1" -ForegroundColor Green
+Write-Host "Installing Maven settings" -ForegroundColor Green
 
 $mavenCmdPath = "maven\bin\mvn.cmd"
 $mavenZipPath = "downloads\maven.zip"
@@ -101,7 +82,7 @@ if (Test-Missing -Path $mavenCmdPath)
     Move-Item -Path "apache-maven-3.8.1" -Destination "maven"
 }
 
-$mavenSettingsPath = "maven/conf/settings.xml"
+$mavenSettingsPath = "configuration/settings.xml"
 $mavenSettingsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/settings.xml"
 
 New-Item -Name "maven\repository" -ItemType "directory" -ErrorAction Ignore
@@ -139,14 +120,6 @@ if ($eclipseIniLength -eq 714)
     Remove-Item -Path $eclipseIniPath -ErrorAction Ignore
     Invoke-WebRequest -OutFile $eclipseIniPath -Uri $eclipseIniUri
     (Get-Content -path $eclipseIniPath -Raw) -replace "%DEVENV%", $devenv | Set-Content -Path $eclipseIniPath
-}
-
-$antPrefsPath = "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ant.core.prefs"
-$antPrefsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/org.eclipse.ant.core.prefs"
-
-if (Test-Missing -Path $antPrefsPath)
-{
-    Invoke-WebRequest -Outfile $antPrefsPath -Uri $antPrefsUri
 }
 
 $jdtPrefsPath = "workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.jdt.launching.prefs"
