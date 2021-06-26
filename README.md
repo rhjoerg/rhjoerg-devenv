@@ -48,7 +48,7 @@ The additional JDK-11 is added to the "Installed JREs" settings.
 
 Click on "Review IDE configuration settings" and configure as shown in the image below:
 
-![Configuration settings](images/config.png)
+![Configuration settings](images/eclipse-config.png)
 
 I haven't found the location yet, where Eclipse stores the Maven settings. Therefore go to "Window > Preferences", navigate to "Maven > User Settings"
 and set the global as well as the local settings to ```<root directory>\configuration\settings.xml```. Don't forget to push the "Update Settings" button.
