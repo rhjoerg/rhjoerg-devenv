@@ -15,10 +15,11 @@ function Test-Missing
 #------------------------------------------------------------------------------
 
 Write-Host "Creating Directories" -ForegroundColor Green
-New-Item -Name "configuration" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "downloads" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "jdk" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "git" -ItemType "directory" -ErrorAction Ignore
+New-Item -Name "maven" -ItemType "directory" -ErrorAction Ignore
+New-Item -Name "maven\repository" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "workspace" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "workspace\.metadata" -ItemType "directory" -ErrorAction Ignore
 New-Item -Name "workspace\.metadata" -ItemType "directory" -ErrorAction Ignore
@@ -66,26 +67,9 @@ if (Test-Missing -Path $jdk16ExePath)
 
 Write-Host "Installing Maven settings" -ForegroundColor Green
 
-$mavenCmdPath = "maven\bin\mvn.cmd"
-$mavenZipPath = "downloads\maven.zip"
-$mavenZipUri = "https://downloads.apache.org/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.zip"
-
-if (Test-Missing -Path $mavenCmdPath)
-{
-    if (-Not (Test-Path $mavenZipPath))
-    {
-        Invoke-WebRequest -OutFile $mavenZipPath -Uri $mavenZipUri
-    }
-
-    Expand-Archive -Path $mavenZipPath -DestinationPath "." -Force
-    Remove-Item -Path "maven" -Recurse -Force -ErrorAction Ignore
-    Move-Item -Path "apache-maven-3.8.1" -Destination "maven"
-}
-
-$mavenSettingsPath = "configuration/settings.xml"
+$mavenSettingsPath = "maven/settings.xml"
 $mavenSettingsUri = "https://github.com/rhjoerg/rhjoerg-devenv/releases/download/latest/settings.xml"
 
-New-Item -Name "maven\repository" -ItemType "directory" -ErrorAction Ignore
 Remove-Item -Path $mavenSettingsPath -ErrorAction Ignore
 Invoke-WebRequest -OutFile $mavenSettingsPath -Uri $mavenSettingsUri
 (Get-Content -path $mavenSettingsPath -Raw) -replace "%DEVENV%", $devenv | Set-Content -Path $mavenSettingsPath
